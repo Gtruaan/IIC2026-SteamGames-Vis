@@ -1,0 +1,509 @@
+{
+    "DOOM": {
+        "name": "DOOM",
+        "genre": [
+            "Action"
+        ],
+        "description": "Now includes all three premium DLC packs (Unto the Evil, Hell Followed, and Bloodfall), maps, modes, and weapons, as well as all feature updates including Arcade Mode, Photo Mode, and the latest Update 6.66, which brings further multiplayer improvements as well as revamps multiplayer progression.",
+        "price": "$19.99",
+        "developer": "id Software",
+        "details": [
+            "Single-player",
+            "Multi-player",
+            "Co-op",
+            "Steam Achievements",
+            "Steam Trading Cards",
+            "Partial Controller Support",
+            "Steam Cloud"
+        ],
+        "tags": [
+            "FPS",
+            "Gore",
+            "Action",
+            "Demons",
+            "Shooter",
+            "First-Person",
+            "Great Soundtrack",
+            "Multiplayer",
+            "Singleplayer",
+            "Fast-Paced",
+            "Sci-fi",
+            "Horror",
+            "Classic",
+            "Atmospheric",
+            "Difficult",
+            "Blood",
+            "Remake",
+            "Zombies",
+            "Co-op",
+            "Memes"
+        ],
+        "reviews": "Very Positive",
+        "history": [
+            {
+                "year": 2021,
+                "month": "February ",
+                "avg_players": 1056.09,
+                "peak_players": 2062,
+                "avg_gain": -344.17,
+                "peak_percent": "51.2168%"
+            },
+            {
+                "year": 2021,
+                "month": "January ",
+                "avg_players": 1400.26,
+                "peak_players": 3133,
+                "avg_gain": -366.74,
+                "peak_percent": "44.6939%"
+            },
+            {
+                "year": 2020,
+                "month": "December ",
+                "avg_players": 1766.99,
+                "peak_players": 3224,
+                "avg_gain": 575.23,
+                "peak_percent": "54.8074%"
+            },
+            {
+                "year": 2020,
+                "month": "November ",
+                "avg_players": 1191.76,
+                "peak_players": 3365,
+                "avg_gain": 182.69,
+                "peak_percent": "35.4163%"
+            },
+            {
+                "year": 2020,
+                "month": "October ",
+                "avg_players": 1009.07,
+                "peak_players": 1978,
+                "avg_gain": -35.8,
+                "peak_percent": "51.0147%"
+            },
+            {
+                "year": 2020,
+                "month": "September ",
+                "avg_players": 1044.87,
+                "peak_players": 1900,
+                "avg_gain": -144.66,
+                "peak_percent": "54.9932%"
+            },
+            {
+                "year": 2020,
+                "month": "August ",
+                "avg_players": 1189.53,
+                "peak_players": 2254,
+                "avg_gain": -396.41,
+                "peak_percent": "52.7742%"
+            },
+            {
+                "year": 2020,
+                "month": "July ",
+                "avg_players": 1585.94,
+                "peak_players": 3254,
+                "avg_gain": 453.18,
+                "peak_percent": "48.7382%"
+            },
+            {
+                "year": 2020,
+                "month": "June ",
+                "avg_players": 1132.76,
+                "peak_players": 3323,
+                "avg_gain": -271.33,
+                "peak_percent": "34.0885%"
+            },
+            {
+                "year": 2020,
+                "month": "May ",
+                "avg_players": 1404.09,
+                "peak_players": 2668,
+                "avg_gain": -1443.91,
+                "peak_percent": "52.6271%"
+            },
+            {
+                "year": 2020,
+                "month": "April ",
+                "avg_players": 2848.0,
+                "peak_players": 6800,
+                "avg_gain": -2398.29,
+                "peak_percent": "41.8824%"
+            },
+            {
+                "year": 2020,
+                "month": "March ",
+                "avg_players": 5246.29,
+                "peak_players": 12893,
+                "avg_gain": 2421.31,
+                "peak_percent": "40.691%"
+            },
+            {
+                "year": 2020,
+                "month": "February ",
+                "avg_players": 2824.97,
+                "peak_players": 6673,
+                "avg_gain": 360.23,
+                "peak_percent": "42.3343%"
+            },
+            {
+                "year": 2020,
+                "month": "January ",
+                "avg_players": 2464.74,
+                "peak_players": 6868,
+                "avg_gain": 495.14,
+                "peak_percent": "35.8873%"
+            },
+            {
+                "year": 2019,
+                "month": "December ",
+                "avg_players": 1969.6,
+                "peak_players": 3767,
+                "avg_gain": 349.29,
+                "peak_percent": "52.2856%"
+            },
+            {
+                "year": 2019,
+                "month": "November ",
+                "avg_players": 1620.3,
+                "peak_players": 4633,
+                "avg_gain": 606.5,
+                "peak_percent": "34.973%"
+            },
+            {
+                "year": 2019,
+                "month": "October ",
+                "avg_players": 1013.8,
+                "peak_players": 1926,
+                "avg_gain": -121.57,
+                "peak_percent": "52.6376%"
+            },
+            {
+                "year": 2019,
+                "month": "September ",
+                "avg_players": 1135.37,
+                "peak_players": 2272,
+                "avg_gain": -610.19,
+                "peak_percent": "49.9723%"
+            },
+            {
+                "year": 2019,
+                "month": "August ",
+                "avg_players": 1745.56,
+                "peak_players": 3970,
+                "avg_gain": -216.16,
+                "peak_percent": "43.9688%"
+            },
+            {
+                "year": 2019,
+                "month": "July ",
+                "avg_players": 1961.73,
+                "peak_players": 5623,
+                "avg_gain": -176.03,
+                "peak_percent": "34.8876%"
+            },
+            {
+                "year": 2019,
+                "month": "June ",
+                "avg_players": 2137.76,
+                "peak_players": 4952,
+                "avg_gain": 1075.46,
+                "peak_percent": "43.1696%"
+            },
+            {
+                "year": 2019,
+                "month": "May ",
+                "avg_players": 1062.29,
+                "peak_players": 2152,
+                "avg_gain": 122.23,
+                "peak_percent": "49.3629%"
+            },
+            {
+                "year": 2019,
+                "month": "April ",
+                "avg_players": 940.07,
+                "peak_players": 1742,
+                "avg_gain": -120.43,
+                "peak_percent": "53.965%"
+            },
+            {
+                "year": 2019,
+                "month": "March ",
+                "avg_players": 1060.5,
+                "peak_players": 2313,
+                "avg_gain": 0.0,
+                "peak_percent": "45.8495%"
+            },
+            {
+                "year": 2019,
+                "month": "February ",
+                "avg_players": 1060.49,
+                "peak_players": 2147,
+                "avg_gain": -248.16,
+                "peak_percent": "49.394%"
+            },
+            {
+                "year": 2019,
+                "month": "January ",
+                "avg_players": 1308.66,
+                "peak_players": 2564,
+                "avg_gain": -36.61,
+                "peak_percent": "51.0398%"
+            },
+            {
+                "year": 2018,
+                "month": "December ",
+                "avg_players": 1345.27,
+                "peak_players": 2619,
+                "avg_gain": 317.83,
+                "peak_percent": "51.3658%"
+            },
+            {
+                "year": 2018,
+                "month": "November ",
+                "avg_players": 1027.44,
+                "peak_players": 1984,
+                "avg_gain": -121.77,
+                "peak_percent": "51.7863%"
+            },
+            {
+                "year": 2018,
+                "month": "October ",
+                "avg_players": 1149.21,
+                "peak_players": 2239,
+                "avg_gain": -568.33,
+                "peak_percent": "51.3269%"
+            },
+            {
+                "year": 2018,
+                "month": "September ",
+                "avg_players": 1717.54,
+                "peak_players": 3927,
+                "avg_gain": -1106.98,
+                "peak_percent": "43.7367%"
+            },
+            {
+                "year": 2018,
+                "month": "August ",
+                "avg_players": 2824.52,
+                "peak_players": 7330,
+                "avg_gain": 1190.91,
+                "peak_percent": "38.5337%"
+            },
+            {
+                "year": 2018,
+                "month": "July ",
+                "avg_players": 1633.61,
+                "peak_players": 3374,
+                "avg_gain": 48.83,
+                "peak_percent": "48.4176%"
+            },
+            {
+                "year": 2018,
+                "month": "June ",
+                "avg_players": 1584.78,
+                "peak_players": 3893,
+                "avg_gain": 506.37,
+                "peak_percent": "40.7085%"
+            },
+            {
+                "year": 2018,
+                "month": "May ",
+                "avg_players": 1078.42,
+                "peak_players": 2067,
+                "avg_gain": -225.19,
+                "peak_percent": "52.1732%"
+            },
+            {
+                "year": 2018,
+                "month": "April ",
+                "avg_players": 1303.61,
+                "peak_players": 3036,
+                "avg_gain": 155.7,
+                "peak_percent": "42.9384%"
+            },
+            {
+                "year": 2018,
+                "month": "March ",
+                "avg_players": 1147.91,
+                "peak_players": 2156,
+                "avg_gain": -181.71,
+                "peak_percent": "53.2426%"
+            },
+            {
+                "year": 2018,
+                "month": "February ",
+                "avg_players": 1329.62,
+                "peak_players": 2750,
+                "avg_gain": -266.46,
+                "peak_percent": "48.3498%"
+            },
+            {
+                "year": 2018,
+                "month": "January ",
+                "avg_players": 1596.08,
+                "peak_players": 3504,
+                "avg_gain": -187.06,
+                "peak_percent": "45.5502%"
+            },
+            {
+                "year": 2017,
+                "month": "December ",
+                "avg_players": 1783.14,
+                "peak_players": 3530,
+                "avg_gain": 248.33,
+                "peak_percent": "50.5139%"
+            },
+            {
+                "year": 2017,
+                "month": "November ",
+                "avg_players": 1534.81,
+                "peak_players": 3272,
+                "avg_gain": 187.46,
+                "peak_percent": "46.9074%"
+            },
+            {
+                "year": 2017,
+                "month": "October ",
+                "avg_players": 1347.35,
+                "peak_players": 2896,
+                "avg_gain": -192.16,
+                "peak_percent": "46.5245%"
+            },
+            {
+                "year": 2017,
+                "month": "September ",
+                "avg_players": 1539.51,
+                "peak_players": 3116,
+                "avg_gain": -428.32,
+                "peak_percent": "49.4066%"
+            },
+            {
+                "year": 2017,
+                "month": "August ",
+                "avg_players": 1967.83,
+                "peak_players": 3906,
+                "avg_gain": -1111.2,
+                "peak_percent": "50.3797%"
+            },
+            {
+                "year": 2017,
+                "month": "July ",
+                "avg_players": 3079.03,
+                "peak_players": 10749,
+                "avg_gain": 1373.84,
+                "peak_percent": "28.6448%"
+            },
+            {
+                "year": 2017,
+                "month": "June ",
+                "avg_players": 1705.19,
+                "peak_players": 4940,
+                "avg_gain": -122.37,
+                "peak_percent": "34.518%"
+            },
+            {
+                "year": 2017,
+                "month": "May ",
+                "avg_players": 1827.56,
+                "peak_players": 5089,
+                "avg_gain": 373.31,
+                "peak_percent": "35.912%"
+            },
+            {
+                "year": 2017,
+                "month": "April ",
+                "avg_players": 1454.25,
+                "peak_players": 2663,
+                "avg_gain": -247.81,
+                "peak_percent": "54.6095%"
+            },
+            {
+                "year": 2017,
+                "month": "March ",
+                "avg_players": 1702.05,
+                "peak_players": 4254,
+                "avg_gain": -52.75,
+                "peak_percent": "40.0106%"
+            },
+            {
+                "year": 2017,
+                "month": "February ",
+                "avg_players": 1754.8,
+                "peak_players": 3762,
+                "avg_gain": -1507.45,
+                "peak_percent": "46.6454%"
+            },
+            {
+                "year": 2017,
+                "month": "January ",
+                "avg_players": 3262.25,
+                "peak_players": 9539,
+                "avg_gain": 319.16,
+                "peak_percent": "34.1991%"
+            },
+            {
+                "year": 2016,
+                "month": "December ",
+                "avg_players": 2943.09,
+                "peak_players": 7518,
+                "avg_gain": 905.62,
+                "peak_percent": "39.1472%"
+            },
+            {
+                "year": 2016,
+                "month": "November ",
+                "avg_players": 2037.47,
+                "peak_players": 6987,
+                "avg_gain": -211.48,
+                "peak_percent": "29.1609%"
+            },
+            {
+                "year": 2016,
+                "month": "October ",
+                "avg_players": 2248.95,
+                "peak_players": 4931,
+                "avg_gain": 397.21,
+                "peak_percent": "45.6084%"
+            },
+            {
+                "year": 2016,
+                "month": "September ",
+                "avg_players": 1851.73,
+                "peak_players": 3650,
+                "avg_gain": -1452.93,
+                "peak_percent": "50.7323%"
+            },
+            {
+                "year": 2016,
+                "month": "August ",
+                "avg_players": 3304.67,
+                "peak_players": 8927,
+                "avg_gain": -1078.61,
+                "peak_percent": "37.0188%"
+            },
+            {
+                "year": 2016,
+                "month": "July ",
+                "avg_players": 4383.28,
+                "peak_players": 11610,
+                "avg_gain": -732.28,
+                "peak_percent": "37.7543%"
+            },
+            {
+                "year": 2016,
+                "month": "June ",
+                "avg_players": 5115.56,
+                "peak_players": 11710,
+                "avg_gain": -7920.75,
+                "peak_percent": "43.6854%"
+            },
+            {
+                "year": 2016,
+                "month": "May ",
+                "avg_players": 13036.3,
+                "peak_players": 31623,
+                "avg_gain": 0,
+                "peak_percent": "41.2241%"
+            }
+        ]
+    }
+}
