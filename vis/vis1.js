@@ -88,11 +88,11 @@ function CreateBarChart(dataset) {
     //////////////////// ESCALA Y ///////////////////
     const escalaAvgPlayers = d3
     .scaleLog()
-    .domain([10, maxAvgPlayers + 4000])
+    .domain([10, maxAvgPlayers + 4000]) // Quizas cambiar por 1000 o 10000 y poner 4 ticks
     .range([HEIGHTVIS, 0])
     .nice();
    //////////////////// EJE Y //////////////////////
-   const ejeY = d3.axisLeft(escalaAvgPlayers).ticks(6);
+   const ejeY = d3.axisLeft(escalaAvgPlayers).ticks(6); // Quizas cambiar ticks
    //////////////////// ESCALA Y ///////////////////
    SVG1.append("text").text("Popularidad (jugadores por mes)").attr("x",30).attr("y",30);
    SVG1
@@ -128,10 +128,12 @@ function CreateBarChart(dataset) {
    .text("").attr("x",570).attr("y",590);
    /////////////////////////////////////////////////////////////////////
     // Para incializar el join: quizas poner botones
+    // Se puede parar con Timer stop solo es necesario hacer unos cambios
+
+    // d3-Intervalo: Iniciar el temporizador
     let num = 104
     let randomColor
-    // d3-Intervalo: Iniciar el temporizador
-    d3.interval( () => {
+    const intervalo = d3.interval( () => {
         // Bucle que cambia los meses (103 es el mes mas viejo)
         num = bucle(num)
         let color = 10 // 10 colores
@@ -145,6 +147,7 @@ function CreateBarChart(dataset) {
 
         // Tomar los primeros 10 elementos del array (top 10)
         const top10Games = datasetValues.slice(0, 10);
+        // console.log(top10Games[0].history[num].avg_players) // Para testear cosas
         // TEXTOS
         d3.select("#texto").text(`${top10Games[0].history[num].year}: ${top10Games[0].history[num].month}`)
         // Tenemos que obligatoriamente, obtener la escala, pues no se puede/debe actualizar
