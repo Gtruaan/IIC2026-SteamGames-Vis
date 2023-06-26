@@ -166,7 +166,9 @@ function CreateBarChart(dataset) {
         // Hacer el join con ese top 10
       barras
       .selectAll(".games")
-      .data(top10Games, d => d.name)
+      // Si no hace hace esto como función de data, los datos no se identifican como objeto unico, y se
+      // Sobre escriben
+      .data(top10Games, d => d.name) // Función para asociar nombres como valor unico en DOM
       .join(
       // Elementos de entrada
       enter => {
