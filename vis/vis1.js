@@ -1,19 +1,19 @@
-const colorPalette = {
-    "red": "#fd7f6f",
-    "blue": "#7eb0d5",
-    "green": "#b2e061",
-    "purple": "#bd7ebe",
-    "orange": "#ffb55a",
-    "yellow": "#ffee65",
-    "lavender": "#beb9db",
-    "pink": "#fdcce5",
-    "cyan": "#8bd3c7",
-    "grey": "#c9c9c9",
-};
+const colorPalette = [
+    "#fd7f6f",
+    "#7eb0d5",
+    "#b2e061",
+    "#bd7ebe",
+    "#ffb55a",
+    "#ffee65",
+    "#beb9db",
+    "#fdcce5",
+    "#8bd3c7",
+    "#c9c9c9",
+];
 
 const MARGIN = {
     top: 50,
-    bottom: 60,
+    bottom: 130,
     right: 20,
     left: 56,
 };
@@ -43,15 +43,20 @@ function bucle(num){
     if (num > 1){
         return num - 1
     } else {
-        return num + 104
+        return 103
+    }}
+
+function bucle2(num){
+    if (num > 0){
+        return num - 1
+    } else {
+        return 10
     }
 }
 
 // =============================================================================
 // ============================= PRIMERA VISUALIZACION =========================
 // =============================================================================
-
-const contenedor = SVG1
 
 const barras = SVG1.append("g")
                     .attr("id", "barras");
@@ -78,7 +83,6 @@ function CreateBarChart(dataset) {
     // Ahora extent
     const extentAvgPlayers = d3.extent(allAvgPlayers);
     // Guardamos el maximo y minimo para AvgPlayers en total
-    const minAvgPlayers = extentAvgPlayers[0];
     const maxAvgPlayers = extentAvgPlayers[1];
     // Hacemos las escalas totales
     //////////////////// ESCALA Y ///////////////////
@@ -104,36 +108,93 @@ function CreateBarChart(dataset) {
    //////////////////// ESCALA X ///////////////////
    const escalaX = d3
    .scaleBand()
-   .domain(["x","d"])
+   .domain([])
    .range([0, WIDTHVIS]);
    ///////////////////// EJE X /////////////////////
    const ejeX = d3.axisBottom(escalaX);
    //////////////////// ESCALA X ///////////////////
-   SVG1.append("text").text("Top 10 Juegos por mes:").attr("x",400).attr("y",585);
+   SVG1.append("text").text("Top 10 Juegos por mes:").attr("x",400).attr("y",590);
    SVG1
    .append("g")
+   .attr("id", "ejex")
    .attr("transform", `translate(${MARGIN.left}, ${HEIGHTVIS + MARGIN.top})`)
    .call(ejeX)
    .selectAll("line")
    .attr("opacity", 1)
    ////////////////////////////////////////////////////////////////////////
-
-    //metodo para encontrar el maximo avg_players pero para un mes en particular
-    const maxAvgPlayers_month = d3.max(datasetValues, d => {
-    if (d.history[103] !== undefined){
-        return (d.history[103].avg_players)
-    }});
-
-
     // Para incializar el join: quizas poner botones
+    let num = 104
 
-    let num = bucle(104)
+    // d3-Intervalo: Iniciar el temporizador
+    d3.interval( () => {
+        // Bucle que cambia los meses (103 es el mes mas viejo)
+        num = bucle(num)
+        let color = 10 // 10 colores
 
-    // d3-Intervalo  
-      // Iniciar el temporizador
-    // d3.interval(
-        
-    //     ,1000)
+        // Sort
+        datasetValues.sort((a, b) => {
+            let avgPlayersA = a.history[num]?.avg_players || 0;
+            let avgPlayersB = b.history[num]?.avg_players || 0;
+            return avgPlayersB - avgPlayersA;
+          });
+
+        // Tomar los primeros 10 elementos del array (top 10)
+        const top10Games = datasetValues.slice(0, 10);
+        console.log(top10Games)
+        console.log(top10Games[0].history[num].avg_players)
+        console.log(num)
+        // Tenemos que obligatoriamente, obtener la escala, pues no se puede/debe actualizar
+        // Durante el enter, despues se usará en el join para cada juego:
+        //Contrary to ordinal scales, a band scale’s domain must be defined in full beforehand, 
+        //and cannot be constructed iteratively.
+        escalaX.domain(top10Games.map(d => d.name));
+        const ejeX = d3.axisBottom(escalaX);
+        d3.select("#ejex").call(ejeX)
+        .selectAll("text")
+        .attr("transform", "rotate(-40)")
+        .attr("text-anchor", "end")
+        .attr("dx", "-0.8em")
+        .attr("dy", "-0.5em");
+
+        // Hacer el join con ese top 10
+    barras
+  .selectAll(".games")
+  .data(top10Games, d => d.name)
+  .join(
+    // Elementos de entrada
+    enter => {
+      enter
+        .append("rect")
+        .attr("class","games")
+        .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+        .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
+        .attr("width", 40)
+        //OCURRE ALGO EXTRAÑO CON LOS COLORES
+        .attr("fill", () => {color = bucle2(color); return colorPalette[color]})
+        .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10);
+// ESTE TEXTO ESTA BUG
+        enter
+            .append("text")
+            .text("Top 10 Juegos por mes:").attr("x",300).attr("y",200);
+    },
+    // Elementos de actualización
+    update => {
+      update
+        .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+        .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
+        .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
+        //OCURRE ALGO EXTRAÑO CON LOS COLORES
+//NO FUNCIONA EL UPDATE DE TEXTO (NO SE PORQ)
+        update.select("text")
+        .text(d => d.history[num].month);
+    },
+    // Elementos de salida
+    exit => {
+      exit
+        .remove();
+    }
+  )
+    },2000)
 };
 // testing
 leer();

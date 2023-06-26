@@ -21,3 +21,10 @@ df_filled.to_json('nuevo_dataset.json', orient='index')
 
 # Otro metodo guardado para vis1
 #const maxAvgPlayers = d3.max(Object.values(dataset), d => d.history[57]?.avg_players);
+
+
+    # //metodo para encontrar el maximo avg_players pero para un mes en particular
+    # const maxAvgPlayers_month = d3.max(datasetValues, d => {
+    # if (d.history[103] !== undefined){
+    #     return (d.history[103].avg_players)
+    # }});
