@@ -124,7 +124,7 @@ function CreateBarChart(dataset) {
    ////////////////////////////////////////////////////////////////////////
     // Para incializar el join: quizas poner botones
     let num = 104
-
+    let randomColor
     // d3-Intervalo: Iniciar el temporizador
     d3.interval( () => {
         // Bucle que cambia los meses (103 es el mes mas viejo)
@@ -140,9 +140,6 @@ function CreateBarChart(dataset) {
 
         // Tomar los primeros 10 elementos del array (top 10)
         const top10Games = datasetValues.slice(0, 10);
-        console.log(top10Games)
-        console.log(top10Games[0].history[num].avg_players)
-        console.log(num)
         // Tenemos que obligatoriamente, obtener la escala, pues no se puede/debe actualizar
         // Durante el enter, despues se usará en el join para cada juego:
         //Contrary to ordinal scales, a band scale’s domain must be defined in full beforehand, 
@@ -157,40 +154,53 @@ function CreateBarChart(dataset) {
         .attr("dy", "-0.5em");
 
         // Hacer el join con ese top 10
-    barras
-  .selectAll(".games")
-  .data(top10Games, d => d.name)
-  .join(
-    // Elementos de entrada
-    enter => {
-      enter
-        .append("rect")
-        .attr("class","games")
-        .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
-        .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
-        .attr("width", 40)
-        //OCURRE ALGO EXTRAÑO CON LOS COLORES
-        .attr("fill", () => {color = bucle2(color); return colorPalette[color]})
-        .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10);
-// ESTE TEXTO ESTA BUG
+      barras
+      .selectAll(".games")
+      .data(top10Games, d => d.name)
+      .join(
+      // Elementos de entrada
+      enter => {
         enter
-            .append("text")
-            .text("Top 10 Juegos por mes:").attr("x",300).attr("y",200);
-    },
-    // Elementos de actualización
-    update => {
-      update
-        .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
-        .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
-        .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
-        //OCURRE ALGO EXTRAÑO CON LOS COLORES
-//NO FUNCIONA EL UPDATE DE TEXTO (NO SE PORQ)
+          .append("rect")
+          .attr("class","games")
+          .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+          .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
+          .attr("width", 40)
+          //OCURRE ALGO EXTRAÑO CON LOS COLORES
+          .attr("fill", () => {randomColor = Math.floor(Math.random()*16777215).toString(16); return "#" + randomColor})
+          .attr("opacity", 0)
+          .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
+          .transition() // Agregar la transición
+          .duration(500)
+          .attr("opacity", 1)
+
+          // ESTE TEXTO ESTA BUG
+        enter
+          .append("text")
+          .text("Top 10 Juegos por mes:").attr("x",300).attr("y",200);
+      },
+      // Elementos de actualización
+      update => {
+        update
+          .transition() // Agregar la transición
+          .duration(1000)
+          .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+          .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
+          .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
+          //OCURRE ALGO EXTRAÑO CON LOS COLORES
+
+          //.attr("fill", () => {color = bucle2(color); return colorPalette[color]})
+
+          //NO FUNCIONA EL UPDATE DE TEXTO (NO SE PORQ)
         update.select("text")
-        .text(d => d.history[num].month);
+          .text(d => d.history[num].month);
     },
     // Elementos de salida
     exit => {
       exit
+        .transition() // Agregar la transición
+        .duration(500)
+        .attr("opacity", 0)
         .remove();
     }
   )
