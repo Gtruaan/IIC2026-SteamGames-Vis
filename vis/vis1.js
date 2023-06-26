@@ -121,7 +121,12 @@ function CreateBarChart(dataset) {
    .call(ejeX)
    .selectAll("line")
    .attr("opacity", 1)
-   ////////////////////////////////////////////////////////////////////////
+   //////////////////////////// TEXTO /////////////////////////////////
+   SVG1
+   .append("text")
+   .attr("id", "texto")
+   .text("").attr("x",570).attr("y",590);
+   /////////////////////////////////////////////////////////////////////
     // Para incializar el join: quizas poner botones
     let num = 104
     let randomColor
@@ -140,6 +145,8 @@ function CreateBarChart(dataset) {
 
         // Tomar los primeros 10 elementos del array (top 10)
         const top10Games = datasetValues.slice(0, 10);
+        // TEXTOS
+        d3.select("#texto").text(`${top10Games[0].history[num].year}: ${top10Games[0].history[num].month}`)
         // Tenemos que obligatoriamente, obtener la escala, pues no se puede/debe actualizar
         // Durante el enter, despues se usará en el join para cada juego:
         //Contrary to ordinal scales, a band scale’s domain must be defined in full beforehand, 
@@ -173,11 +180,6 @@ function CreateBarChart(dataset) {
           .transition() // Agregar la transición
           .duration(500)
           .attr("opacity", 1)
-
-          // ESTE TEXTO ESTA BUG
-        enter
-          .append("text")
-          .text("Top 10 Juegos por mes:").attr("x",300).attr("y",200);
       },
       // Elementos de actualización
       update => {
@@ -190,10 +192,6 @@ function CreateBarChart(dataset) {
           //OCURRE ALGO EXTRAÑO CON LOS COLORES
 
           //.attr("fill", () => {color = bucle2(color); return colorPalette[color]})
-
-          //NO FUNCIONA EL UPDATE DE TEXTO (NO SE PORQ)
-        update.select("text")
-          .text(d => d.history[num].month);
     },
     // Elementos de salida
     exit => {
