@@ -19,8 +19,8 @@ const MARGIN = {
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
-const SVG3_WIDTH = 5000;
-const SVG3_HEIGHT = 5000;
+const SVG3_WIDTH = 2000; // 5000
+const SVG3_HEIGHT = 2000; // 5000
 
 const SVG3 = d3.select("#vis-3").append("svg");
 //width height
@@ -83,7 +83,7 @@ function CreateCircularPacking(dataset) {
 
     const size = d3.scaleLinear()
     .domain([20, 104])
-    .range([10, 40])
+    .range([2, 10]) // 10 40
 
 
     const color = d3.scaleOrdinal()
