@@ -77,18 +77,9 @@ function CreateCircularPacking(dataset) {
     .domain(['Mostly Negative','Very Positive', 'Mostly Positive', 'Mixed','Overwhelmingly Positive'])
     .range([SVG3_HEIGHT / 2, SVG3_HEIGHT / 2, 2 * SVG3_HEIGHT / 4, 3 * SVG3_HEIGHT / 4, SVG3_HEIGHT / 4])
 
-    const rad = d3.scaleLinear()
-    .domain([3, 20])
-    .range([0, 100])
-
     const size = d3.scaleLinear()
     .domain([20, 104])
     .range([2, 10]) // 10 40
-
-
-    const color = d3.scaleOrdinal()
-  .domain(['Overwhelmingly Positive', 'Very Positive', 'Mostly Positive', 'Mixed', 'Mostly Negative'])
-  .range([ "#F8766D", "#00BA38", "#619CFF", "#c9ff40", "#6b1efa"])
 
   const node = SVG3.append("g")
   .selectAll("circle")
