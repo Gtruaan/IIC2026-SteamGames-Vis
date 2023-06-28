@@ -19,8 +19,8 @@ const MARGIN = {
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
-const SVG3_WIDTH = 1500;
-const SVG3_HEIGHT = 1500;
+const SVG3_WIDTH = 2000;
+const SVG3_HEIGHT = 2000;
 
 const SVG3 = d3.select("#vis-3").append("svg");
 //width height
@@ -47,10 +47,28 @@ function CreateCircularPacking(dataset) {
     // Obtenemos los valores de cada objeto
     const datasetValues = Object.values(dataset);
     console.log("DATOS NORMALES", datasetValues);
+
+  ////////////////////////////////////////////////////
+  // PODEMOS USAR LO COMENTADO PARA VER LOS VALORES UNICOS QUE QUERAMOS
+
+    const uniqueReviews = new Set();
+
+  for (const game in datasetValues) {
+    if (datasetValues.hasOwnProperty(game)) {
+      const reviews = datasetValues[game].price;
+      uniqueReviews.add(reviews);
+    }
+  }
+
+  console.log([...uniqueReviews]);
+
+  ////////////////////////////////////////////////////////
+
     // ['Very Positive', 'Mixed', 'Mostly Positive', 
     //'Overwhelmingly Positive', 'Mostly Negative']
     // 'Overwhelmingly Negative' 'Very Negative'
     // Positive Negative
+
     const x = d3.scaleOrdinal()
     .domain(['Mostly Negative','Very Positive', 'Mostly Positive', 'Mixed','Overwhelmingly Positive'])
     .range([SVG3_WIDTH / 4, SVG3_WIDTH / 2, 3 * SVG3_WIDTH / 4, SVG3_WIDTH / 2, SVG3_WIDTH / 2])
@@ -75,7 +93,16 @@ function CreateCircularPacking(dataset) {
   .attr("r", 10)
   .attr("cx", SVG3_WIDTH / 2)
   .attr("cy", SVG3_HEIGHT / 2)
-  .style("fill", d => color(d.reviews))
+  .style("fill", d => {if(typeof d.price === "string" && (d.price).charAt(0) !== "$"){
+    return "red"
+  } else if (typeof d.price === "string" && parseFloat((d.price).slice(1)) < 15.00){
+    return "green"
+  } else if (typeof d.price === "string" && parseFloat((d.price).slice(1)) < 30.00){
+    return "yellow"
+  } else if (typeof d.price === "string" && parseFloat((d.price).slice(1)) > 30.00){
+    return "purple"
+  } else return "blue"
+})
   .style("fill-opacity", 0.8)
   .attr("stroke", "black")
   .style("stroke-width", 1)
@@ -89,7 +116,7 @@ function CreateCircularPacking(dataset) {
     .force("y", d3.forceY().strength(0.5).y(d => y(d.reviews)))
     .force("center", d3.forceCenter().x(SVG3_WIDTH/2).y(SVG3_HEIGHT/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(.1).radius(11).iterations(1)) // Force that avoids circle overlapping
+    .force("collide", d3.forceCollide().strength(.8).radius(11).iterations(1)) // Force that avoids circle overlapping
 // Apply these forces to the nodes and update their positions.
 // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
 simulation
@@ -100,12 +127,12 @@ simulation
           .attr("cy", d => d.y)
     });
 
-    function stopSimulation() {
-      simulation.stop();
-    }
+    // function stopSimulation() {
+    //   simulation.stop();
+    // }
     
-    // Detén la simulación cuando lo desees, por ejemplo, después de un cierto período de tiempo
-    setTimeout(stopSimulation, 5000);
+    // // Detén la simulación cuando lo desees, por ejemplo, después de un cierto período de tiempo
+    // setTimeout(stopSimulation, 5000);
 
 // What happens when a circle is dragged?
 function dragstarted(event, d) {
