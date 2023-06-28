@@ -20,7 +20,7 @@ const MARGIN = {
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
 const SVG3_WIDTH = 1500;
-const SVG3_HEIGHT = 600;
+const SVG3_HEIGHT = 1500;
 
 const SVG3 = d3.select("#vis-3").append("svg");
 //width height
@@ -52,8 +52,12 @@ function CreateCircularPacking(dataset) {
     // 'Overwhelmingly Negative' 'Very Negative'
     // Positive Negative
     const x = d3.scaleOrdinal()
-    .domain(['Very Positive', 'Mixed', 'Mostly Positive'])
-    .range([-40, 320, 520, 740, 900])
+    .domain(['Mostly Negative','Very Positive', 'Mostly Positive', 'Mixed','Overwhelmingly Positive'])
+    .range([SVG3_WIDTH / 4, SVG3_WIDTH / 2, 3 * SVG3_WIDTH / 4, SVG3_WIDTH / 2, SVG3_WIDTH / 2])
+
+    const y = d3.scaleOrdinal()
+    .domain(['Mostly Negative','Very Positive', 'Mostly Positive', 'Mixed','Overwhelmingly Positive'])
+    .range([SVG3_HEIGHT / 2, SVG3_HEIGHT / 2, 2 * SVG3_HEIGHT / 4, 3 * SVG3_HEIGHT / 4, SVG3_HEIGHT / 4])
 
     const rad = d3.scaleLinear()
     .domain([3, 20])
@@ -61,25 +65,20 @@ function CreateCircularPacking(dataset) {
 
 
     const color = d3.scaleOrdinal()
-  .domain(['Very Positive', 'Mixed', 'Mostly Positive','Overwhelmingly Positive', 'Mostly Negative'])
+  .domain(['Overwhelmingly Positive', 'Very Positive', 'Mostly Positive', 'Mixed', 'Mostly Negative'])
   .range([ "#F8766D", "#00BA38", "#619CFF", "#c9ff40", "#6b1efa"])
 
   const node = SVG3.append("g")
   .selectAll("circle")
   .data(datasetValues, d => d.name)
   .join("circle")
-  .attr("r", d => {
-    if(d.price === "Free to Play")
-    //rad(parseFloat(num.slice(1)))
-    {console.log("FRee")}
-    }
-    )
+  .attr("r", 10)
   .attr("cx", SVG3_WIDTH / 2)
   .attr("cy", SVG3_HEIGHT / 2)
   .style("fill", d => color(d.reviews))
   .style("fill-opacity", 0.8)
   .attr("stroke", "black")
-  .style("stroke-width", 0.1)
+  .style("stroke-width", 1)
   .call(d3.drag() // call specific function when circle is dragged
        .on("start", dragstarted)
        .on("drag", dragged)
@@ -87,10 +86,10 @@ function CreateCircularPacking(dataset) {
 
     let simulation = d3.forceSimulation()
     .force("x", d3.forceX().strength(0.5).x(d => x(d.reviews)))
-    .force("y", d3.forceY().strength(0.5).y( SVG3_HEIGHT/2 ))
+    .force("y", d3.forceY().strength(0.5).y(d => y(d.reviews)))
     .force("center", d3.forceCenter().x(SVG3_WIDTH/2).y(SVG3_HEIGHT/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(.1).radius(25).iterations(1)) // Force that avoids circle overlapping
+    .force("collide", d3.forceCollide().strength(.1).radius(11).iterations(1)) // Force that avoids circle overlapping
 // Apply these forces to the nodes and update their positions.
 // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
 simulation
@@ -100,6 +99,13 @@ simulation
           .attr("cx", d => d.x)
           .attr("cy", d => d.y)
     });
+
+    function stopSimulation() {
+      simulation.stop();
+    }
+    
+    // Detén la simulación cuando lo desees, por ejemplo, después de un cierto período de tiempo
+    setTimeout(stopSimulation, 5000);
 
 // What happens when a circle is dragged?
 function dragstarted(event, d) {
