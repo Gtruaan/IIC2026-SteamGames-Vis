@@ -19,8 +19,8 @@ const MARGIN = {
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
-const SVG3_WIDTH = 2000;
-const SVG3_HEIGHT = 2000;
+const SVG3_WIDTH = 5000;
+const SVG3_HEIGHT = 5000;
 
 const SVG3 = d3.select("#vis-3").append("svg");
 //width height
@@ -51,16 +51,16 @@ function CreateCircularPacking(dataset) {
   ////////////////////////////////////////////////////
   // PODEMOS USAR LO COMENTADO PARA VER LOS VALORES UNICOS QUE QUERAMOS
 
-    const uniqueReviews = new Set();
+  // const uniqueReviews = new Set();
 
-  for (const game in datasetValues) {
-    if (datasetValues.hasOwnProperty(game)) {
-      const reviews = datasetValues[game].price;
-      uniqueReviews.add(reviews);
-    }
-  }
+  // for (const game in datasetValues) {
+  //   if (datasetValues.hasOwnProperty(game)) {
+  //     const reviews = datasetValues[game].history.length;
+  //     uniqueReviews.add(reviews);
+  //   }
+  // }
 
-  console.log([...uniqueReviews]);
+  // console.log([...uniqueReviews]);
 
   ////////////////////////////////////////////////////////
 
@@ -81,6 +81,10 @@ function CreateCircularPacking(dataset) {
     .domain([3, 20])
     .range([0, 100])
 
+    const size = d3.scaleLinear()
+    .domain([20, 104])
+    .range([10, 40])
+
 
     const color = d3.scaleOrdinal()
   .domain(['Overwhelmingly Positive', 'Very Positive', 'Mostly Positive', 'Mixed', 'Mostly Negative'])
@@ -90,7 +94,7 @@ function CreateCircularPacking(dataset) {
   .selectAll("circle")
   .data(datasetValues, d => d.name)
   .join("circle")
-  .attr("r", 10)
+  .attr("r", d => {return size(d.history.length)})
   .attr("cx", SVG3_WIDTH / 2)
   .attr("cy", SVG3_HEIGHT / 2)
   .style("fill", d => {if(typeof d.price === "string" && (d.price).charAt(0) !== "$"){
@@ -116,7 +120,7 @@ function CreateCircularPacking(dataset) {
     .force("y", d3.forceY().strength(0.5).y(d => y(d.reviews)))
     .force("center", d3.forceCenter().x(SVG3_WIDTH/2).y(SVG3_HEIGHT/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(.8).radius(11).iterations(1)) // Force that avoids circle overlapping
+    .force("collide", d3.forceCollide().strength(.8).radius(d => {return size(d.history.length)+3}).iterations(1)) // Force that avoids circle overlapping
 // Apply these forces to the nodes and update their positions.
 // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
 simulation
