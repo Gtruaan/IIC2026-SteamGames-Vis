@@ -289,6 +289,6 @@ function CreateBarChart(dataset) {
   )
     }, 1500)
 };
-// testing
-leer();
 
+
+leer();

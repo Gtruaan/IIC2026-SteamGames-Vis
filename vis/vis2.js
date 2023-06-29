@@ -144,7 +144,10 @@ function createMLChart(ds) {
                                  .attr("class", "genre-line")
                                  .on("mouseover", hoverGenre)
                                  .on("mousemove", (event, d) => moveGenre(event, d, currentDate))
-                                 .on("mouseleave", leaveGenre);
+                                 .on("mouseleave", leaveGenre)
+                                 .on("click", (event, d) => {
+                                    leer3(d.name);
+                                    });
 
                 genreLine.append("path")
                          .attr("class", "genre-path")
@@ -209,7 +212,5 @@ function createMLChart(ds) {
     }, 1500);
     }
 
-    
- 
 
 read();

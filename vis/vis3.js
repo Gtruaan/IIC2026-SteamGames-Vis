@@ -21,9 +21,9 @@ const legendacolor = {
 
 const MARGIN3 = {
     top: 50,
-    bottom: 130,
+    bottom: 50,
     right: 20,
-    left: 56,
+    left: 20,
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
@@ -38,9 +38,17 @@ const HEIGHTVIS3 = SVG3_HEIGHT - MARGIN3.top - MARGIN3.bottom;
 const WIDTHVIS3 = SVG3_WIDTH - MARGIN3.right - MARGIN3.left;
 
 // Function para leer el json
-function leer(){
+function leer3(filter){
     d3.json("data/dataset.json")
         .then((datos) => {
+          // change text of selected category
+          d3.selectAll("#selected-cat").text(filter);
+          SVG3.selectAll("*").remove();
+            datos = Object.values(datos);
+            if(filter != "Todas las categorías") {
+                datos = datos.filter(d => d.genre.includes(filter));
+            }
+
             console.log(datos);
             console.log("Cantidad de objetos en el dataset:", Object.keys(datos).length);
             CreateCircularPacking(datos);     
@@ -51,9 +59,8 @@ function leer(){
 // ============================= TERCERA VISUALIZACION =========================
 // =============================================================================
 
-function CreateCircularPacking(dataset) {
+function CreateCircularPacking(datasetValues) {
     // Obtenemos los valores de cada objeto
-    const datasetValues = Object.values(dataset);
     console.log("DATOS NORMALES", datasetValues);
 
      ///////////////////////////
@@ -230,4 +237,8 @@ simulation
 
 };
 
-leer();
+leer3("Todas las categorías");
+
+d3.select("#reset-btn").on("click", () => {
+  leer3("Todas las categorías");
+});

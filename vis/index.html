@@ -28,7 +28,18 @@
             border: 2px solid black;
         }
 
+        #reset-btn {
+            margin-bottom: 5px;
+            padding: 5px;
+            border: 2px solid black;
+        }
+
         #skip-btn:hover {
+            background-color: gray;
+            color: white;
+        }
+
+        #reset-btn:hover {
             background-color: gray;
             color: white;
         }
@@ -75,14 +86,17 @@
         <p>Dado que son demasiados juegos, y puede ser complicado situar el mouse sobre uno,
             es posible hacer <b>Zoom y mover la cámara</b><br> para verlos mejor y explorar el catálogo.</p>
         </p>
+        <br>
+        <p><b>Filtrando por categoría:</b> <span id="selected-cat">.</span></p>
+        <button id="reset-btn">Reiniciar filtro</button>
         <div id="vis-3"></div>
 
         <h2><a href="../">Volver a informe</a></h2>
     </div>
     <script src="tooltip.js"></script>
     <script src="vis1.js"></script>
-    <script src="vis2.js"></script>
     <script src="vis3.js"></script>
+    <script src="vis2.js"></script>
 </body>
 
 </html>
