@@ -29,6 +29,10 @@ let read = function() {
 
 let currentDate = new Date(2012, 7, 1);
 
+d3.select("#skip-btn").on("click", () => {
+    currentDate = new Date(2021, 2, 2);
+});
+
 let hoverGenre = () => {
     tooltip.body.style("opacity", 1);
 }
@@ -42,9 +46,9 @@ let moveGenre = (event, d, cd) => {
         tooltip.text.html(`${d.name}<br><br>Cantidad promedio de jugadores:<br>${0}<br>`);
         return;
     }
-    let current_val = points.at(-1);
+    let current_val = points.at(-1); 
 
-    tooltip.text.html(`${d.name}<br><br>Cantidad promedio de jugadores:<br>${Math.round(current_val.avg_players)}<br>`);
+    tooltip.text.html(`${d.name}<br><br>Cantidad promedio de jugadores actual:<br>${Math.round(current_val.avg_players)}<br>`);
 }
 
 let leaveGenre = () => {
