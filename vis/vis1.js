@@ -1,26 +1,34 @@
-const colorPalette = [
-    "#fd7f6f",
-    "#7eb0d5",
-    "#b2e061",
-    "#bd7ebe",
-    "#ffb55a",
-    "#ffee65",
-    "#beb9db",
-    "#fdcce5",
-    "#8bd3c7",
-    "#c9c9c9",
-];
+const colorPalette = {
+    "Action": "#fa4d56", // Rojo
+    "Strategy": "#4589ff", // Azul
+    "Adventure": "#6fdc8c", // Verde
+    "Massively Multiplayer": "#d2a106", // Amarillo
+    "Indie": "#8a3ffc", // Morado 
+    "RPG": "#ba4e00", // Naranjo
+    "Early Access": "#d4bbff", // Lila
+    "Free to Play": "#d4bbff", // Lila
+    "Simulation": "#ff7eb6", // Rosado
+    "Sports": "#007d79", // Turquesa oscuro
+    "Casual": "#33b1ff", // Cian
+    "Racing": "#08bdba", // Turquesa
+    "Animation & Modeling": "#bae6ff", // Claro
+    "Design & Illustration": "#bae6ff", // Claro
+    "Utilities": "#bae6ff", // Claro
+    "Video Production": "#bae6ff", // Claro
+    "Audio Production": "#bae6ff", // Claro
+    "Web Publishing": "#bae6ff", // Claro
+};
 
 const MARGIN1 = {
     top: 50,
-    bottom: 130,
-    right: 20,
+    bottom: 150,
+    right: 70,
     left: 56,
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
 const SVG1_WIDTH = 900;
-const SVG1_HEIGHT = 600;
+const SVG1_HEIGHT = 650;
 
 const SVG1 = d3.select("#vis-1").append("svg");
 //width height
@@ -58,6 +66,39 @@ function bucle2(num){
 // ============================= PRIMERA VISUALIZACION =========================
 // =============================================================================
 
+
+let hoverBar = () => {
+    tooltip.body.style("opacity", 1);
+}
+
+let moveBar = (event, d) => {
+    tooltip.body.style("left", event.pageX + 15 + "px")
+                .style("top", event.pageY + 15 + "px");
+    console.log(d);
+    tooltip.text.html(`${d.name}<br><br>Género: ${d.genre.join(", ")}` + 
+                      `<br><br>Reviews: ${d.reviews}<br>Precio: ${d.price}<br>`);
+}
+/*{
+    "name": "Garry's Mod",
+    "genre": "Indie,Simulation",
+    "description": "Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We give you the tools and leave you to play.",
+    "price": "$9.99",
+    "mature_content": 0,
+    "developer": "Facepunch Studios",
+    "details": [
+        "Single-player",
+    ],
+    "tags": [
+        "Sandbox",
+    ],
+    "reviews": "Overwhelmingly Positive",
+}*/
+
+let leaveBar = () => {
+    tooltip.body.style("opacity", 0);
+}
+
+
 const barras = SVG1.append("g")
                     .attr("id", "barras");
 
@@ -94,7 +135,11 @@ function CreateBarChart(dataset) {
    //////////////////// EJE Y //////////////////////
    const ejeY = d3.axisLeft(escalaAvgPlayers).ticks(6); // Quizas cambiar ticks
    //////////////////// ESCALA Y ///////////////////
-   SVG1.append("text").text("Popularidad (jugadores por mes)").attr("x",30).attr("y",30);
+   SVG1.append("text").text("Popularidad (jugadores por mes)")
+   .attr("x",30)
+   .attr("y",30)
+   .attr("font-weight", "bolder")
+   .attr("font-size", 12);
    repEjeY = SVG1
    .append("g")
    .attr("id", "left_bar")
@@ -113,7 +158,10 @@ function CreateBarChart(dataset) {
    ///////////////////// EJE X /////////////////////
    const ejeX = d3.axisBottom(escalaX);
    //////////////////// ESCALA X ///////////////////
-   SVG1.append("text").text("Top 10 Juegos por mes:").attr("x",400).attr("y",590);
+   SVG1.append("text").text("Top 10 Juegos por mes:")
+   .attr("x",570)
+   .attr("y",635)
+   .attr("font-weight", "bolder").attr("font-size", 12);
    repEjeX = SVG1
    .append("g")
    .attr("id", "ejex")
@@ -130,7 +178,10 @@ function CreateBarChart(dataset) {
    SVG1
    .append("text")
    .attr("id", "texto")
-   .text("").attr("x",570).attr("y",590);
+   .text("...").attr("x", 720)
+   .attr("y", 635)
+   .attr("font-weight", "bolder")
+   .attr("font-size", 12);
    /////////////////////////////////////////////////////////////////////
     // Para incializar el join: quizas poner botones
     // Se puede parar con Timer stop solo es necesario hacer unos cambios
@@ -154,14 +205,15 @@ function CreateBarChart(dataset) {
         const top10Games = datasetValues.slice(0, 10);
         // console.log(top10Games[0].history[num].avg_players) // Para testear cosas
         // TEXTOS
-        d3.select("#texto").text(`${top10Games[0].history[num].year}: ${top10Games[0].history[num].month}`)
+        d3.select("#texto")
+        .text(`${top10Games[0].history[num].month} ${top10Games[0].history[num].year}`)
         // Tenemos que obligatoriamente, obtener la escala, pues no se puede/debe actualizar
         // Durante el enter, despues se usará en el join para cada juego:
         //Contrary to ordinal scales, a band scale’s domain must be defined in full beforehand, 
         //and cannot be constructed iteratively.
         escalaX.domain(top10Games.map(d => {
-          if(d.name.length > 20){
-            return d.name.slice(0,20) + "..."
+          if(d.name.length > 27){
+            return d.name.slice(0, 27) + "..."
           }
           return d.name;
         }));
@@ -182,7 +234,7 @@ function CreateBarChart(dataset) {
       .data(top10Games, d => d.name) // Función para asociar nombres como valor unico en DOM
       .join(
       // Elementos de entrada
-      enter => {
+      (enter) => {
         enter
           .append("rect")
           .attr("class","games")
@@ -190,21 +242,26 @@ function CreateBarChart(dataset) {
           .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
           .attr("width", 40)
           //OCURRE ALGO EXTRAÑO CON LOS COLORES
-          .attr("fill", () => {randomColor = Math.floor(Math.random()*16777215).toString(16); return "#" + randomColor})
+          .attr("fill", (d) => colorPalette[d.genre[0]])
+          .attr("stroke-width", 2)
+          .attr("stroke", "black")
           .attr("opacity", 0)
           .attr("x", d => {
             let name = d.name;
-            if(name.length > 20) { 
-              return escalaX(d.name.slice(0,20) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+            if(name.length > 27) { 
+              return escalaX(d.name.slice(0, 27) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
             }
             return escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
           })
+          .on("mouseover", hoverBar)
+        .on("mousemove", moveBar)
+        .on("mouseleave", leaveBar)
           .transition() // Agregar la transición
           .duration(500)
           .attr("opacity", 1)
       },
       // Elementos de actualización
-      update => {
+      (update) => {
         update
           .transition() // Agregar la transición
           .duration(1000)
@@ -212,8 +269,8 @@ function CreateBarChart(dataset) {
           .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
           .attr("x", d => {
             let name = d.name;
-            if(name.length > 20) { 
-              return escalaX(d.name.slice(0,20) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+            if(name.length > 27) { 
+              return escalaX(d.name.slice(0, 27) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
             }
             return escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
           })
@@ -222,7 +279,7 @@ function CreateBarChart(dataset) {
           //.attr("fill", () => {color = bucle2(color); return colorPalette[color]})
     },
     // Elementos de salida
-    exit => {
+    (exit) => {
       exit
         .transition() // Agregar la transición
         .duration(500)
@@ -230,7 +287,7 @@ function CreateBarChart(dataset) {
         .remove();
     }
   )
-    },2000)
+    }, 1500)
 };
 // testing
 leer();
