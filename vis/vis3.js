@@ -119,16 +119,17 @@ let leaveCircle = () => {
   .on("mouseleave", leaveCircle)
 
   /////////
-  text.append("circle").attr("cx",8).attr("cy",10).attr("r", 6).style("fill", legendacolor.red)
-  text.append("circle").attr("cx",8).attr("cy",30).attr("r", 6).style("fill", legendacolor.green)
-  text.append("circle").attr("cx",8).attr("cy",50).attr("r", 6).style("fill", legendacolor.yellow)
-  text.append("circle").attr("cx",8).attr("cy",70).attr("r", 6).style("fill", legendacolor.purple)
-  text.append("circle").attr("cx",8).attr("cy",90).attr("r", 6).style("fill", legendacolor.blue)
-  text.append("text").attr("x", 170).attr("y", 14).text("Gratis, paquete o Demo").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
-  text.append("text").attr("x", 163).attr("y", 34).text("Precio menor a 15.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
-  text.append("text").attr("x", 196).attr("y", 54).text("Precio entre 15.00$ y 30.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
-  text.append("text").attr("x", 163).attr("y", 74).text("Precio mayor a 30.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
-  text.append("text").attr("x", 168).attr("y", 94).text("Precio no especificado").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
+  const legends = SVG3.append("g").attr("class","legends");
+  legends.append("circle").attr("cx",8).attr("cy",10).attr("r", 6).style("fill", legendacolor.red)
+  legends.append("circle").attr("cx",8).attr("cy",30).attr("r", 6).style("fill", legendacolor.green)
+  legends.append("circle").attr("cx",8).attr("cy",50).attr("r", 6).style("fill", legendacolor.yellow)
+  legends.append("circle").attr("cx",8).attr("cy",70).attr("r", 6).style("fill", legendacolor.purple)
+  legends.append("circle").attr("cx",8).attr("cy",90).attr("r", 6).style("fill", legendacolor.blue)
+  legends.append("text").attr("x", 170).attr("y", 14).text("Gratis, paquete o Demo").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
+  legends.append("text").attr("x", 163).attr("y", 34).text("Precio menor a 15.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
+  legends.append("text").attr("x", 196).attr("y", 54).text("Precio entre 15.00$ y 30.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
+  legends.append("text").attr("x", 163).attr("y", 74).text("Precio mayor a 30.00$").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
+  legends.append("text").attr("x", 168).attr("y", 94).text("Precio no especificado").attr("text-anchor", "end").attr("font-weight", "bolder").attr("font-size", 12);
   /////////
 
   text.append("text")
