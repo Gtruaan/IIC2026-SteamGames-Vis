@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://d3js.org/d3.v7.js"></script>
     <title>Analizador de Steam</title>
-
     <style>
         body {
             background-color: antiquewhite;
@@ -39,20 +38,43 @@
 <body>
     <div class="container">
         <h1>Analizador de Steam 🔎 </h1>
+        <p><b>Nota</b>: Esta es una visualización dinámica que va cambiando con el tiempo.</p>
+        <p>El contador de tiempo es <b>compartido</b> por las primeras dos visualizaciones, por lo que<br>
+        puedes analizar cómo van cambiando ambas en conjunto.</p>
 
-        <h2>Juegos más populares</h2>
+        <h2>Juegos más populares 🎮</h2>
         <p>A continuación, se muestran los <b>10 juegos más populares</b> en cada periodo, desde el 
         2012 hasta el 2021.</p>
+        <p>La leyenda en la esquina inferior derecha muestra el periodo de tiempo actual, tanto para<br>
+        esta como para la segunda visualización.</p>
+        <p>Se muestran los juegos ordenados por popularidad. Puedes <b>colocar el mouse</b> sobre <br>
+        una barra para ver información detallada del juego.</p>
         <div id="vis-1"></div>
 
-        <h2>Géneros más populares</h2>
-        <p>Esta Visualización permite estudiar la <b>evolución de los géneros más populares</b>
+        <h2>Categorías más populares 🏆</h2>
+        <p>Esta Visualización permite estudiar la <b>evolución de las categorías más populares</b>
         junto a los periodos de la Visualización anterior.</p>
+        <p>Cada categoría viene con un color asociado. De todas formas, puedes <b>colocar el mouse</b>
+        sobre alguna linea para ver información<br> (nombre y cantidad de jugadores).</p>
+        <p>La visualización evoluciona junto con la anterior, dependiendo del periodo de tiempo.
+        Sin embargo, si te cansas de esperar<br> y quieres verla completa, puedes <b>presionar el botón</b>
+        de abajo para avanzarla hasta la fecha más reciente.</p>
+        <p>Puede resultar dificil ver las categorías con menor popularidad, debido al solapamiento.
+        Es por esto que tienes la opción de hacer<br> <b>Zoom y mover la cámara</b>. Con esto podrás captar
+        todos los detalles.</p>
         <div id="vis-2"></div>
         <button id="skip-btn">Saltarse a la visualización completa</button>
 
-        <h2>Tercera Visualización</h2>
-        <p>Work in Progress.</p>
+        <h2>Catálogo de Juegos ordenados por calificaciones 👍👎</h2>
+        <p>En esta visualización puedes ver cercano a los 1000 juegos más populares de Steam.</p>
+        <p>Los juegos se encuentran agrupados dependiendo de sus calificaciones. El color de los 
+            círculos depende del precio, y el tamaño<br> es proporcional al tiempo que lleva en el mercado.
+        </p>
+        <p>Al igual que en la primera visualización, puedes <b>colocar el mouse</b> sobre un círculo para
+        ver información detallada del juego.</p>
+        <p>Dado que son demasiados juegos, y puede ser complicado situar el mouse sobre uno,
+            es posible hacer <b>Zoom y mover la cámara</b><br> para verlos mejor y explorar el catálogo.</p>
+        </p>
         <div id="vis-3"></div>
 
         <h2><a href="../">Volver a informe</a></h2>
