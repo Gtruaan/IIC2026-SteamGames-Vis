@@ -121,13 +121,165 @@
                     <h4>Tipos de datos a utilizar en el proyecto</h4>
                     <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <p>Se ocupan dos Data Sets:</p>
+                    <h4>Popularity of games on Steam</h4>
+                    <p>El Data Set describe la evolución de la popularidad y la cantidad de jugadores de 1260
+                      juegos de la plataforma Steam, desde la fecha de estreno de cada uno hasta el 2021. Las
+                      observaciones de cantidad de jugadores promedio y máxima se registran en forma <b>tabular</b> por cada mes, de
+                      la siguiente forma:
+                    </p>
+                    <table>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Mes</th>
+                        <th>Año</th>
+                        <th>Jugadores promedio </th>
+                        <th>Jugadores máximo</th>
+                      </tr>
+                      <tr>
+                        <td>Among Us</td>
+                        <td>December</td>
+                        <td>2019</td>
+                        <td>1.515.431</td>
+                        <td>44.134.143</td>
+                      </tr>
+                      <tr>
+                        <td>Among Us</td>
+                        <td>January</td>
+                        <td>2020</td>
+                        <td>3.213</td>
+                        <td>166.942</td>
+                      </tr>
+                      <tr>
+                        <td>Tomb Raider</td>
+                        <td>August</td>
+                        <td>2017</td>
+                        <td>3.412</td>
+                        <td>6.344</td>
+                      </tr>
+                    </table>
+
+                    <h4>Steam games complete dataset</h4>
+                    <p>El Data Set describe la información de 40.000 juegos de la plataforma Steam, incluyendo
+                      género, precio, descripción, entre otros atributos. Las observaciones se registran en forma
+                    <b>tabular</b>.
+                    </p>
+                    
+                    <h4>Preprocesamiento y Data Sets resultantes</h4>
+                    <p>Se preprocesaron los Data Sets para quitar valores <code>NaN</code>, obtener listar para 
+                      los atributos de género y categoría, y sacar atributos poco útiles 
+                      como precio en descuento, requerimientos, etc.</p>
+                    <p>Posteriormente, se juntaron ambos Data Sets en dos archivos JSON:</p>
+                    <ul>
+                      <li><b>dataset.json</b></li>
+                      <p>Contiene información de los juegos junto con el historial de popularidad.
+                        Cada ítem es un juego, con atributos que lo describen.
+                        Se encuentra en el siguiente formato:
+                      </p>
+                      <code>
+          {
+            "DOOM": {
+              "name": "DOOM",
+              "genre": ["Action", ...],
+              "description": "Destroy demons and...,
+              "price": "$19.99",
+              "developer": "id Software",
+              "details": ["Single-player", ...],
+              "tags": ["FPS", ...],
+              "reviews": "Very Positive",
+              "history": [
+                {
+                  "year": 2021,
+                  "month": "February ",
+                  "avg_players": 1056.09,
+                  "peak_players": 2062,
+                  "avg_gain": -344.17,
+                  "peak_percent": "51.2168%"
+                },
+                ...
+                ]
+              },
+              ...
+          }
+                      </code>
+                      <br><br>
+                      <li><b>genres.json</b></li>
+                      <p>Contiene información de las categorías de los juegos. Cada ítem es un género, 
+                        con su nombre e historial de popularidad. 
+                        Se encuentra en el siguiente formato:
+                      </p>
+                      <code>
+          [
+            {
+              "name": "Action",
+              "history": [
+                {
+                  "date": "2012-07-01",
+                  "avg_players": 263496.3899999999
+                },
+                {
+                  "date": "2012-08-01",
+                  "avg_players": 262573.9
+                }, 
+                ...
+                ]
+            },
+            ...
+          ]
+                      </code>
+                    </ul>
+
+                <p>Todos los datos presentes corresponden a atributos simples, ya sea cuantitativos, 
+                  categóricos u ordinales. A continuación se presenta un desglose de los atributos.
+                </p>
                 </div>
                 <div class="response">
                     <h4>Tipos de atributos presente en los datos</h4>
                     <!-- Puedes agregar los P que sean necesarios -->
                     <h4>Respuesta:</h4>
-                    <p>Modifica solo este texto (no el de arriba) para poner tu respuesta</p>
+                    <h4>dataset.json</h4>
+                    <p>Como fue mencionado anteriormente, cada ítem es un juego con los siguientes atributos:</p>
+                    <h5><b>Atributos cuantitativos</b></h5>
+                    <ul>
+                      <li><b>price</b>: Precio del juego en dólares</li>
+                    </ul>
+                    <h5><b>Atributos categóricos</b></h5>
+                    <ul>
+                      <li><b>name</b>: Nombre del juego</li>
+                      <li><b>genre</b>: Género del juego</li>
+                      <li><b>developer</b>: Desarrollador del juego</li>
+                      <li><b>details</b>: Modos de juego</li>
+                      <li><b>tags</b>: Etiquetas del juego</li>
+                      <li><b>reviews</b>: Calificación de los usuarios</li>
+                    </ul>
+                    <h5><b>historial</b></h5>
+                    <p>Este atributo es un arreglo que contiene sub-ítems representando
+                      la popularidad de un juego en cierto periodo de tiempo. Contiene los siguientes atributos:
+                    </p>
+                    <ul>
+                      <li><b>year</b>: Año (ordinal)</li>
+                      <li><b>month</b>: Mes (ordinal)</li>
+                      <li><b>avg_players</b>: Jugadores promedio (cuantitativo)</li>
+                      <li><b>peak_players</b>: Jugadores máximo (cuantitativo)</li>
+                      <li><b>avg_gain</b>: Ganancia promedio (cuantitativo)</li>
+                      <li><b>peak_percent</b>: Porcentaje de jugadores máximo (cuantitativo)</li>
+                    </ul>
+                    
+                    <h4>genres.json</h4>
+                    <p>Cada ítem es una categoría de juego con los siguientes atributos:</p>
+                    <h5><b>Atributos categóricos</b></h5>
+                    <ul>
+                      <li><b>name</b>: Nombre del género</li>
+                    </ul>
+                    <h5><b>historial</b></h5>
+                    <p>Este atributo es un arreglo que contiene sub-ítems representando
+                      la popularidad de un género en cierto periodo de tiempo. 
+                      Contiene los siguientes atributos:
+                    </p>
+                    <ul>
+                      <li><b>date</b>: Fecha (ordinal)</li>
+                      <li><b>avg_players</b>: Jugadores promedio (cuantitativo)</li>
+                    </ul>
                 </div>
         </div>
 

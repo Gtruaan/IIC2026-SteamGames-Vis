@@ -9,6 +9,17 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+th, td {
+    border: 1px solid black;
+}
+
+code {
+    /* respect line breaks */
+    white-space: pre-wrap;
+    padding: 5px;
+    margin: 5px;
+}
+
 .case h2 {
     /* Puedes cambiar el color de fondo (background-color) si lo deseas */
     background-color: #e0a45e;
