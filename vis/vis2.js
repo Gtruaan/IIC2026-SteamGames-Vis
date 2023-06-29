@@ -101,7 +101,7 @@ function createMLChart(ds) {
     yAxisCont.selectAll("text").attr("font-weight", "bolder").attr("font-size", 12);
 
     const zoom = d3.zoom()
-                    .scaleExtent([1, 3])
+                    .scaleExtent([1, 5])
                     .extent([[0, 0], [SVG2_WIDTH, SVG2_HEIGHT]])
                     .translateExtent([[0, 0], [SVG2_WIDTH, SVG2_HEIGHT]])
                     .on("start", () => console.log("empecé"))
