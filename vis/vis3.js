@@ -211,7 +211,7 @@ simulation
     // setTimeout(stopSimulation, 5000);
 
   const zoom = d3.zoom()
-  .scaleExtent([1, 3])
+  .scaleExtent([1, 6])
   .extent([[0, 0], [SVG3_WIDTH, SVG3_HEIGHT]])
   .translateExtent([[0, 0], [SVG3_WIDTH, SVG3_HEIGHT]])
   .on("zoom", (event) => {
