@@ -11,7 +11,7 @@ const colorPalette = [
     "#c9c9c9",
 ];
 
-const MARGIN = {
+const MARGIN1 = {
     top: 50,
     bottom: 130,
     right: 20,
@@ -26,12 +26,12 @@ const SVG1 = d3.select("#vis-1").append("svg");
 //width height
 SVG1.attr("width", SVG1_WIDTH).attr("height", SVG1_HEIGHT)
 
-const HEIGHTVIS = SVG1_HEIGHT - MARGIN.top - MARGIN.bottom;
-const WIDTHVIS = SVG1_WIDTH - MARGIN.right - MARGIN.left;
+const HEIGHTVIS = SVG1_HEIGHT - MARGIN1.top - MARGIN1.bottom;
+const WIDTHVIS = SVG1_WIDTH - MARGIN1.right - MARGIN1.left;
 
 // Function para leer el json
 function leer(){
-    d3.json("./nuevodataset.json")
+    d3.json("data/dataset.json")
         .then((datos) => {
             console.log(datos);
             console.log("Cantidad de objetos en el dataset:", Object.keys(datos).length);
@@ -95,12 +95,12 @@ function CreateBarChart(dataset) {
    const ejeY = d3.axisLeft(escalaAvgPlayers).ticks(6); // Quizas cambiar ticks
    //////////////////// ESCALA Y ///////////////////
    SVG1.append("text").text("Popularidad (jugadores por mes)").attr("x",30).attr("y",30);
-   SVG1
+   repEjeY = SVG1
    .append("g")
    .attr("id", "left_bar")
-   .attr("transform", `translate(${MARGIN.left}, ${MARGIN.top})`)
-   .call(ejeY)
-   .selectAll("line")
+   .attr("transform", `translate(${MARGIN1.left}, ${MARGIN1.top})`)
+   .call(ejeY);
+   repEjeY.selectAll("line")
    .attr("opacity", 1)
    .attr("x1", WIDTHVIS)
    .attr("stroke-dasharray", 5)
@@ -114,13 +114,18 @@ function CreateBarChart(dataset) {
    const ejeX = d3.axisBottom(escalaX);
    //////////////////// ESCALA X ///////////////////
    SVG1.append("text").text("Top 10 Juegos por mes:").attr("x",400).attr("y",590);
-   SVG1
+   repEjeX = SVG1
    .append("g")
    .attr("id", "ejex")
-   .attr("transform", `translate(${MARGIN.left}, ${HEIGHTVIS + MARGIN.top})`)
-   .call(ejeX)
-   .selectAll("line")
+   .attr("transform", `translate(${MARGIN1.left}, ${HEIGHTVIS + MARGIN1.top})`)
+   .call(ejeX);
+   repEjeX.selectAll("line")
    .attr("opacity", 1)
+   /////////////////////////////// PRETTIFY ESCALAS ////////////////
+   repEjeX.selectAll("path").attr("stroke-width", 2);
+   repEjeX.selectAll("text").attr("font-weight", "bolder").attr("font-size", 12);
+   repEjeY.selectAll("path").attr("stroke-width", 2);
+   repEjeY.selectAll("text").attr("font-weight", "bolder").attr("font-size", 12);
    //////////////////////////// TEXTO /////////////////////////////////
    SVG1
    .append("text")
@@ -154,14 +159,20 @@ function CreateBarChart(dataset) {
         // Durante el enter, despues se usará en el join para cada juego:
         //Contrary to ordinal scales, a band scale’s domain must be defined in full beforehand, 
         //and cannot be constructed iteratively.
-        escalaX.domain(top10Games.map(d => d.name));
+        escalaX.domain(top10Games.map(d => {
+          if(d.name.length > 20){
+            return d.name.slice(0,20) + "..."
+          }
+          return d.name;
+        }));
         const ejeX = d3.axisBottom(escalaX);
         d3.select("#ejex").call(ejeX)
         .selectAll("text")
         .attr("transform", "rotate(-40)")
         .attr("text-anchor", "end")
         .attr("dx", "-0.8em")
-        .attr("dy", "-0.5em");
+        .attr("font-weight", "bolder")
+        .attr("font-size", 12);
 
         // Hacer el join con ese top 10
       barras
@@ -175,13 +186,19 @@ function CreateBarChart(dataset) {
         enter
           .append("rect")
           .attr("class","games")
-          .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+          .attr("y", d => MARGIN1.top + escalaAvgPlayers(d.history[num].avg_players))
           .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
           .attr("width", 40)
           //OCURRE ALGO EXTRAÑO CON LOS COLORES
           .attr("fill", () => {randomColor = Math.floor(Math.random()*16777215).toString(16); return "#" + randomColor})
           .attr("opacity", 0)
-          .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
+          .attr("x", d => {
+            let name = d.name;
+            if(name.length > 20) { 
+              return escalaX(d.name.slice(0,20) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+            }
+            return escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+          })
           .transition() // Agregar la transición
           .duration(500)
           .attr("opacity", 1)
@@ -191,9 +208,15 @@ function CreateBarChart(dataset) {
         update
           .transition() // Agregar la transición
           .duration(1000)
-          .attr("y", d => MARGIN.top + escalaAvgPlayers(d.history[num].avg_players))
+          .attr("y", d => MARGIN1.top + escalaAvgPlayers(d.history[num].avg_players))
           .attr("height", d => HEIGHTVIS - escalaAvgPlayers(d.history[num].avg_players))
-          .attr("x", d => escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN.left + 10)
+          .attr("x", d => {
+            let name = d.name;
+            if(name.length > 20) { 
+              return escalaX(d.name.slice(0,20) + "...") + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+            }
+            return escalaX(d.name) + escalaX.bandwidth() / 10 + MARGIN1.left + 10;
+          })
           //OCURRE ALGO EXTRAÑO CON LOS COLORES
 
           //.attr("fill", () => {color = bucle2(color); return colorPalette[color]})

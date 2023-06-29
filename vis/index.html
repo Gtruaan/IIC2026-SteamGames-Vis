@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <title>Visualización</title>
-    <meta charset="utf-8" />
-  </head>
+<html lang="en">
 
-  <body>
-    <h1>¿Visualización?</h1>
-    <p>Esa también anda perdida...</p>
-    <p>.</p>
-    <a href="../">Volver a informe</a>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.js"></script>
+    <title>T03</title>
+
+    <style>
+        body {
+            background-color: antiquewhite;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        svg {
+            border: 2px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Analizador de Steam 🔎 </h1>
+
+        <h2>Juegos más populares</h2>
+        <p>A continuación, se muestran los <b>10 juegos más populares</b> en cada periodo, desde el 
+        2012 hasta el 2021.</p>
+        <div id="vis-1"></div>
+
+        <h2>Géneros más populares</h2>
+        <p>Esta Visualización permite estudiar la <b>evolución de los géneros más populares</b>
+        junto a los periodos de la Visualización anterior.</p>
+        <div id="vis-2"></div>
+        <h2>Tercera Visualización</h2>
+        <p>Work in Progress.</p>
+        <div id="vis-3"></div>
+
+        <h2><a href="../">Volver a informe</a></h2>
+    </div>
+    <script src="vis1.js"></script>
+    <script src="vis2.js"></script>
+    <script src="vis3.js"></script>
+</body>
+
 </html>

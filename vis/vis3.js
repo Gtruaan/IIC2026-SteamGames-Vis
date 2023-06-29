@@ -1,17 +1,4 @@
-const colorPalette = [
-    "#fd7f6f",
-    "#7eb0d5",
-    "#b2e061",
-    "#bd7ebe",
-    "#ffb55a",
-    "#ffee65",
-    "#beb9db",
-    "#fdcce5",
-    "#8bd3c7",
-    "#c9c9c9",
-];
-
-const MARGIN = {
+const MARGIN3 = {
     top: 50,
     bottom: 130,
     right: 20,
@@ -19,19 +6,19 @@ const MARGIN = {
 };
 
 // Constantes para no andar hardcodeando por la vida (copy gus)
-const SVG3_WIDTH = 2000; // 5000
-const SVG3_HEIGHT = 2000; // 5000
+const SVG3_WIDTH = 600; // 5000
+const SVG3_HEIGHT = 600; // 5000
 
 const SVG3 = d3.select("#vis-3").append("svg");
 //width height
 SVG3.attr("width", SVG3_WIDTH).attr("height", SVG3_HEIGHT)
 
-const HEIGHTVIS = SVG3_HEIGHT - MARGIN.top - MARGIN.bottom;
-const WIDTHVIS = SVG3_WIDTH - MARGIN.right - MARGIN.left;
+const HEIGHTVIS3 = SVG3_HEIGHT - MARGIN3.top - MARGIN3.bottom;
+const WIDTHVIS3 = SVG3_WIDTH - MARGIN3.right - MARGIN3.left;
 
 // Function para leer el json
 function leer(){
-    d3.json("./nuevodataset.json")
+    d3.json("data/dataset.json")
         .then((datos) => {
             console.log(datos);
             console.log("Cantidad de objetos en el dataset:", Object.keys(datos).length);
@@ -79,7 +66,7 @@ function CreateCircularPacking(dataset) {
 
     const size = d3.scaleLinear()
     .domain([20, 104])
-    .range([2, 10]) // 10 40
+    .range([1, 4]) // 10 40
 
   const node = SVG3.append("g")
   .selectAll("circle")
@@ -111,7 +98,7 @@ function CreateCircularPacking(dataset) {
     .force("y", d3.forceY().strength(0.5).y(d => y(d.reviews)))
     .force("center", d3.forceCenter().x(SVG3_WIDTH/2).y(SVG3_HEIGHT/2)) // Attraction to the center of the svg area
     .force("charge", d3.forceManyBody().strength(1)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(.8).radius(d => {return size(d.history.length)+3}).iterations(1)) // Force that avoids circle overlapping
+    .force("collide", d3.forceCollide().strength(.8).radius(d => {return size(d.history.length)+1}).iterations(1)) // Force that avoids circle overlapping
 // Apply these forces to the nodes and update their positions.
 // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
 simulation
