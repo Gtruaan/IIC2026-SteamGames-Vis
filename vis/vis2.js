@@ -104,7 +104,6 @@ function createMLChart(ds) {
                     .scaleExtent([1, 5])
                     .extent([[0, 0], [SVG2_WIDTH, SVG2_HEIGHT]])
                     .translateExtent([[0, 0], [SVG2_WIDTH, SVG2_HEIGHT]])
-                    .on("start", () => console.log("empecé"))
                     .on("zoom", (event) => {
                         const transform = event.transform;
                         containers.attr("transform", transform);
@@ -126,8 +125,7 @@ function createMLChart(ds) {
                                  .attr("stroke-dasharray", 5)
                                  .attr("stroke-width", 2 / transform.k)
                                  .attr("opacity", 0.5);
-                    })
-                    .on("end", () => console.log("terminé"));
+                    });
 
                     SVG2.call(zoom)
 
