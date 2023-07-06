@@ -31,6 +31,29 @@ const SVG1_WIDTH = 900;
 const SVG1_HEIGHT = 650;
 
 const SVG1 = d3.select("#vis-1").append("svg");
+const ANNOTATIONS = d3.select("#annotations").append("svg");
+ANNOTATIONS.attr("width", SVG1_WIDTH).attr("height", 80).attr("id", "annotations-svg")
+
+// LEGENDS
+
+const legends = ANNOTATIONS.append("g").attr("class","legends");
+let x = 80;
+let y = 10;
+let i = 0;
+for(let genre in colorPalette){
+  legends.append("circle").attr("cx",x).attr("cy",y).attr("r", 6).style("fill", colorPalette[genre])
+  legends.append("text").attr("x", x).attr("y", y).attr("dx", 10).attr("dy", 3).text(genre).attr("text-anchor", "start").attr("font-weight", "bolder").attr("font-size", 12);
+  x += 200;
+  i++;
+  if(i % 4 == 0){
+    x = 80;
+    y += 20;
+  }
+  if(i == 12) break;
+}
+legends.append("text").attr("x", x).attr("y", y).attr("dx", 10).attr("dy", 3).text("Other").attr("text-anchor", "start").attr("font-weight", "bolder").attr("font-size", 12);
+legends.append("circle").attr("cx", x).attr("cy",y).attr("r", 6).style("fill", "#bae6ff")
+
 //width height
 SVG1.attr("width", SVG1_WIDTH).attr("height", SVG1_HEIGHT)
 

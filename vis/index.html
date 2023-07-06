@@ -43,6 +43,11 @@
             background-color: gray;
             color: white;
         }
+
+        svg#annotations-svg {
+            background-color: transparent;
+            border: none;
+        }
     </style>
 </head>
 
@@ -52,7 +57,7 @@
         <p><b>Nota</b>: Esta es una visualización dinámica que va cambiando con el tiempo.</p>
         <p>El contador de tiempo es <b>compartido</b> por las primeras dos visualizaciones, por lo que<br>
         puedes analizar cómo van cambiando ambas en conjunto.</p>
-
+        
         <h2>Juegos más populares 🎮</h2>
         <p>A continuación, se muestran los <b>10 juegos más populares</b> en cada periodo, desde el 
         2012 hasta el 2021.</p>
@@ -75,6 +80,7 @@
         todos los detalles.</p>
         <p>Puedes hacer click sobre alguna categoría para <b>filtrar</b> la tercera visualización.</p>
         </p>
+        <div id="annotations"></div>
         <div id="vis-2"></div>
         <button id="skip-btn">Saltarse a la visualización completa</button>
 
